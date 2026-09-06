@@ -31,7 +31,7 @@ export default function TopHeader({ userData, onOpenCreatePost, searchQuery, set
   const userPhoto = userData?.photo || 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80'
 
   return (
-    <header className="sticky top-0 z-20 h-18 px-4 sm:px-6 flex items-center justify-between border-b border-slate-200 dark:border-[#1E2536] bg-white/90 dark:bg-[#0B0E14]/90 backdrop-blur-md transition-colors duration-200">
+    <header className="fixed right-0 lg:left-64 left-0  top-0 z-20 h-18 px-4 sm:px-6 flex items-center justify-between border-b border-slate-200 dark:border-[#1E2536] bg-white/90 dark:bg-[#0B0E14]/90 backdrop-blur-md transition-colors duration-200">
        {/*toggle menu*/}
         <button
           onClick={setIsSidebarOpen}

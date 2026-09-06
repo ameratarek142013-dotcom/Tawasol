@@ -118,7 +118,7 @@ export default function PostCreation({ isProfile, userData, isOpenProp, onOpenCh
                 </div>
 
                 {/* Bottom Row: Quick Action Media Buttons */}
-                <div className="flex items-center justify-between pt-1 border-t  dark:border-[#1C2436] border-slate-200 text-xs font-medium  dark:text-slate-300 text-slate-600">
+                <div className="hidden md:flex items-center justify-between pt-1 border-t  dark:border-[#1C2436] border-slate-200 text-xs font-medium  dark:text-slate-300 text-slate-600">
                     <button
                         onClick={handleModalOpen}
                         className="flex items-center gap-2 py-1.5 px-2.5 rounded-xl  dark:hover:bg-[#1E2638] hover:bg-slate-100 transition cursor-pointer  dark:text-slate-300 text-slate-700  dark:hover:text-white hover:text-slate-900"

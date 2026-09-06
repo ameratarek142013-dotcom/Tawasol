@@ -5,7 +5,7 @@ import SuggestedFriendsList from '../Home/SuggestedFriendsList'
 
 export default function FollowerSuggetions() {
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-[#0B0E14] text-slate-900 dark:text-slate-100 flex justify-center px-4 py-6 transition-colors duration-200">
+    <div className="h-lvh bg-slate-100 dark:bg-[#0B0E14] text-slate-900 dark:text-slate-100 flex justify-center px-4 py-6 transition-colors duration-200">
       <div className="w-full max-w-lg flex flex-col gap-4">
         <div className="flex items-center gap-2">
           <Link

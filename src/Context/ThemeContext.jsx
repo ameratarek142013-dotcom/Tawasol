@@ -13,13 +13,11 @@ export default function ThemeContextProvider({ children }) {
 
   useEffect(() => {
     const root = document.documentElement
-    if (theme === 'dark') {
-      root.classList.add('dark')
-      root.setAttribute('data-theme', 'dark')
-    } else {
-      root.classList.remove('dark')
-      root.setAttribute('data-theme', 'light')
-    }
+    const isDarkTheme = theme === 'dark'
+
+    root.classList.toggle('dark', isDarkTheme)
+    root.setAttribute('data-theme', isDarkTheme ? 'dark' : 'light')
+    root.style.colorScheme = isDarkTheme ? 'dark' : 'light'
     localStorage.setItem('nexora-theme', theme)
   }, [theme])
 

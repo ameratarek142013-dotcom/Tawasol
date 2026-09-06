@@ -98,7 +98,7 @@ export default function PostCreation({ isProfile, userData, isOpenProp, onOpenCh
     return (
         <>
             {/* Post Creation Box in Feed */}
-            <div className={`w-full  dark:bg-[#151B27] bg-white border  dark:border-[#222B3E] border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col gap-3.5 transition-colors duration-200 ${isProfile ? '' : 'mb-3'}`}>
+            <div className={`w-full  dark:bg-[#151B27] bg-white border  dark:border-[#222B3E] border-slate-200 rounded-2xl p-4 shadow-xs flex flex-col gap-3.5 transition-colors duration-200 ${isProfile ? 'lg:mb-1 ' : ''}`}>
                 {/* Top: Avatar + Pill Input */}
                 <div className="flex items-center gap-3">
                     <Link to={`/profile/${userData?.id || userData?._id}`} className="shrink-0">
@@ -118,7 +118,7 @@ export default function PostCreation({ isProfile, userData, isOpenProp, onOpenCh
                 </div>
 
                 {/* Bottom Row: Quick Action Media Buttons */}
-                <div className="hidden md:flex items-center justify-between pt-1 border-t  dark:border-[#1C2436] border-slate-200 text-xs font-medium  dark:text-slate-300 text-slate-600">
+                <div className="flex items-center justify-between pt-1 border-t  dark:border-[#1C2436] border-slate-200 text-xs font-medium  dark:text-slate-300 text-slate-600">
                     <button
                         onClick={handleModalOpen}
                         className="flex items-center gap-2 py-1.5 px-2.5 rounded-xl  dark:hover:bg-[#1E2638] hover:bg-slate-100 transition cursor-pointer  dark:text-slate-300 text-slate-700  dark:hover:text-white hover:text-slate-900"
@@ -143,13 +143,7 @@ export default function PostCreation({ isProfile, userData, isOpenProp, onOpenCh
                         <span>Check in</span>
                     </button>
 
-                    <button
-                        onClick={handleModalOpen}
-                        className="flex items-center gap-2 py-1.5 px-2.5 rounded-xl  dark:hover:bg-[#1E2638] hover:bg-slate-100 transition cursor-pointer  dark:text-slate-300 text-slate-700  dark:hover:text-white hover:text-slate-900"
-                    >
-                        <IoVideocamOutline className="text-lg text-purple-400" />
-                        <span>Live Video</span>
-                    </button>
+                    
 
                     <button
                         onClick={handleModalOpen}

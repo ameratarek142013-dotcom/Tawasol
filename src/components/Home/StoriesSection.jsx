@@ -85,10 +85,10 @@ export default function StoriesSection() {
   }
 
   return (
-    <div className="relative w-full my-1">
+    <div className="relative w-full">
       <div
         ref={scrollRef}
-        className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-none scroll-smooth"
+        className="flex items-center gap-3 overflow-x-auto  scrollbar-none scroll-smooth"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
         {/* Create Story Card */}

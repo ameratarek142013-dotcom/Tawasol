@@ -138,7 +138,7 @@ export default function Home() {
           setIsSidebarOpen={() => setIsSidebarOpen(true)}
         />
 
-        <div className="flex-1 w-full flex justify-center items-start gap-6 px-3 sm:px-6 xl:px-8 py-5 overflow-y-auto overflow-x-hidden min-w-0">
+        <div className="flex-1 w-full flex justify-center items-start gap-6 px-3 sm:px-6 xl:px-8 py-3 overflow-y-auto overflow-x-hidden min-w-0">
           <main className="w-full max-w-155 2xl:max-w-165 min-w-0 flex flex-col gap-4 shrink">
             {!normalizedQuery && (
               <>

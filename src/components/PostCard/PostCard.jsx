@@ -258,7 +258,7 @@ export default function PostCard({ post, isDetails, comments, isProfile, userDat
 
     return (
         <>
-            <div className={`w-full bg-white dark:bg-[#151B27] border border-slate-200 dark:border-[#222B3E] rounded-2xl shadow-xs transition-all duration-200 overflow-hidden ${isProfile ? '' : 'mb-3'}`}>
+            <div className={`w-full bg-white dark:bg-[#151B27] border border-slate-200 dark:border-[#222B3E] rounded-2xl shadow-xs transition-all duration-200 overflow-hidden `}>
                 <div className={isDetails ? 'flex flex-col lg:flex-row' : 'flex flex-col'}>
                     <div className={isDetails ? 'lg:w-7/12 flex flex-col' : 'w-full flex flex-col'}>
                         {/* Header: Author + Options */}

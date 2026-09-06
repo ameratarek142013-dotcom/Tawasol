@@ -353,12 +353,12 @@ export default function Profile() {
                     </>
                   )}
 
-                  {isMyProfile && (
+                  {/* {isMyProfile && (
                     <>
                       <button className="primary-btn">Edit Profile</button>
                       <button className="icon-btn">•••</button>
                     </>
-                  )}
+                  )} */}
                 </div>
               </div>
             </div>
@@ -434,7 +434,7 @@ export default function Profile() {
           </aside>
 
           {/* Posts */}
-          <div className="flex flex-col gap-2">
+          <div className="flex profile-main-column flex-col gap-2">
             {isMyProfile && <PostCreation userData={data} isProfile />}
 
             {isProfilePostsLoading ? (

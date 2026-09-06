@@ -339,13 +339,13 @@ export default function Profile() {
               <div className="profile-name-row">
                 <div>
                   <h1 className="profile-name capitalize">{profileUser?.name}</h1>
-                  <div className="flex gap-3">
+                  <div className="flex justify-center gap-3">
                     <p className="profile-subtitle">{profileUser?.followersCount || 0} followers</p>
                   <p className="profile-subtitle">{profileUser?.followingCount || 0} following</p>
                   </div>
                 </div>
 
-                <div className="profile-actions">
+                <div className="profile-actions pt-2">
                   {!isMyProfile && (
                     <>
                       <button className="primary-btn">Message</button>

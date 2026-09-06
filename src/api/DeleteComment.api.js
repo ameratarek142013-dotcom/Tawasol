@@ -1,0 +1,10 @@
+import axios from "axios"
+
+
+export const deleteComment = async (postId , commentId)=>{
+    return await axios.delete(`https://route-posts.routemisr.com/posts/${postId}/comments/${commentId}` , {
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem('userToken')}`
+        }
+    })
+}

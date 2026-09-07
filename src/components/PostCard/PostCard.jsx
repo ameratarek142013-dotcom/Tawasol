@@ -350,7 +350,7 @@ export default function PostCard({ post, isDetails, comments, isProfile, userDat
                                         className="w-8 h-8 rounded-full object-cover border border-slate-300 dark:border-slate-700"
                                     />
                                     <div className="flex flex-col text-left">
-                                        <span className="text-xs font-semibold capitalize text-slate-800 dark:text-slate-100">
+                                        <span className="text-xs font-semibold capitalize text-slate-900 dark:text-white">
                                             {sharedUserName}
                                         </span>
                                         <div className="flex items-center gap-1.5 text-[11px] text-slate-500 dark:text-slate-400">

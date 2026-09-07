@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Layout from './components/Layout/Layout'
@@ -18,6 +18,8 @@ import { useNetworkState } from 'react-use'
 import ThemeContextProvider from './Context/ThemeContext'
 import Settings from './components/Settings/Settings'
 import FollowerSuggetions from './components/FollowerSuggetions/FollowerSuggetions'
+import ProfilePhotos from './components/ProfilePhotos/ProfilePhotos'
+import ProfileFollowers from './components/ProfileFollowers/ProfileFollowers'
 
 
 const query = new QueryClient()
@@ -27,7 +29,12 @@ let router = createBrowserRouter([
   {
     path: "", element: <Layout />, children: [
       { path: "/home", element: <ProtectedRoute><Home /></ProtectedRoute> },
+      { path: "/profile", element: <ProtectedRoute><Profile /></ProtectedRoute> },
       { path: "/profile/:id", element: <ProtectedRoute><Profile /></ProtectedRoute> },
+      { path: "/profile/photos", element: <ProtectedRoute><ProfilePhotos /></ProtectedRoute> },
+      { path: "/profile/:id/photos", element: <ProtectedRoute><ProfilePhotos /></ProtectedRoute> },
+      { path: "/profile/followers", element: <ProtectedRoute><ProfileFollowers /></ProtectedRoute> },
+      { path: "/profile/:id/followers", element: <ProtectedRoute><ProfileFollowers /></ProtectedRoute> },
       { path: "/settings", element: <ProtectedRoute><Settings/></ProtectedRoute> },
       { path: "/followsuggetions", element: <ProtectedRoute><FollowerSuggetions/></ProtectedRoute> },
       { path: "/postdetails/:id", element: <ProtectedRoute><PostDetails /></ProtectedRoute> },
@@ -42,10 +49,10 @@ function App() {
   const {online} = useNetworkState()
   const [count, setCount] = useState(0)
 
-  return (
-    <>
-      {!online ? toast.error('You are offline now 🛜!', {
-        toastId: 'offline-toast', // بديله id عشان ميتكررش
+   useEffect(() => {
+    if (!online) {
+      toast.error('You are offline now 🛜!', {
+        toastId: 'offline-toast',
         position: "bottom-right",
         autoClose: false,
         hideProgressBar: true,
@@ -55,9 +62,14 @@ function App() {
         progress: undefined,
         theme: "dark",
         transition: Zoom,
-      }) : toast.dismiss('offline-toast')}
+      })
+    } else {
+      toast.dismiss('offline-toast')
+    }
+  }, [online])
 
-
+  return (
+    <>
       <ThemeContextProvider>
           <QueryClientProvider client={query}>
             <UserContextProvider>

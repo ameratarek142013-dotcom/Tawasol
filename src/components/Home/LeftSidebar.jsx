@@ -64,8 +64,8 @@ export default function LeftSidebar({
           }`}
       >
         <div className="flex flex-col gap-5 overflow-y-auto pr-1">
-          <div className="flex items-center justify-between px-2 py-1">
-            <Link to="/home" className="flex items-center gap-3">
+          <div className="flex items-center justify-between px-2 py-1 lg:py-6">
+            <Link to="/home" className="flex lg:hidden items-center gap-3">
               <div className="w-9 h-9 rounded-xl bg-linear-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-lg shadow-purple-600/30">
                 <span className="text-white font-black text-xl tracking-tighter">T</span>
               </div>
@@ -103,7 +103,7 @@ export default function LeftSidebar({
                     <span className={activeItem === item.label ? 'text-indigo-400' : 'text-slate-500'}>
                       {item.icon}
                     </span>
-                    <span className={activeItem === item.label ? 'text-indigo-400 font-bold' : 'text-slate-400 dark:text-slate-200'}>{item.label}</span>
+                    <span className={activeItem === item.label ? 'text-indigo-400 font-bold' : 'text-slate-500 dark:text-slate-200'}>{item.label}</span>
                   </div>
 
                   {item.badge && (

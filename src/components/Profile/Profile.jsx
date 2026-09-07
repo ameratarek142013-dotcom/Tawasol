@@ -31,24 +31,27 @@ export default function Profile() {
   const imageInput = useRef(null);
   const queryClient = useQueryClient();
 
-  const { data : followingData, isPending, mutate } = useMutation({
-      mutationFn: () => followUsers(userData._id),
-      onSuccess: (response) => {
-        const data = response?.data
-        console.log(data);
-        
-        queryClient.invalidateQueries({ queryKey: ['profile'] })
-        queryClient.invalidateQueries({ queryKey: ['userProfile'] })
-      }
-    })
+  const defaultAvatar = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80";
 
-  
+  const { data: followingData, isPending, mutate } = useMutation({
+    mutationFn: () => followUsers(targetUserId || userData?._id),
+    onSuccess: (response) => {
+      const data = response?.data
+      console.log(data);
+
+      queryClient.invalidateQueries({ queryKey: ['profile'] })
+      queryClient.invalidateQueries({ queryKey: ['userProfile'] })
+    }
+  })
+
+
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["profile"],
     queryFn: () => getProfile(),
     select: (data) => data?.data?.data?.user,
   });
 
+  const targetUserId = id || data?._id;
 
   const {
     data: userData,
@@ -56,17 +59,33 @@ export default function Profile() {
     isError: isUserDataError,
     error: userDataError,
   } = useQuery({
-    queryKey: ["userProfile", id],
-    queryFn: () => getUserProfile(id),
-    enabled: !!id,
+    queryKey: ["userProfile", targetUserId],
+    queryFn: () => getUserProfile(targetUserId),
+    enabled: !!targetUserId,
     select: (data) => data?.data?.data?.user,
   });
 
 
   const isMyProfile = !id || String(id) === String(data?._id);
-  const profileUser = isMyProfile ? data : userData;
+  const profileUser = isMyProfile
+    ? {
+        ...data,
+        ...userData,
+        followers:
+          Array.isArray(userData?.followers) && userData.followers.length > 0 && typeof userData.followers[0] === "object"
+            ? userData.followers
+            : data?.followers || userData?.followers || [],
+        following:
+          Array.isArray(userData?.following) && userData.following.length > 0 && typeof userData.following[0] === "object"
+            ? userData.following
+            : data?.following || userData?.following || [],
+      }
+    : userData;
 
- 
+  const followersList = profileUser?.followers || [];
+  const followingList = profileUser?.following || [];
+
+
   const {
     data: profilePosts,
     isLoading: isProfilePostsLoading,
@@ -83,7 +102,7 @@ export default function Profile() {
   console.log("User Profile:", userData);
   console.log("Profile Posts:", profilePosts);
 
- 
+
   const { isLoading: isUploadProfilePhotoLoading, mutate: uploadProfilePhoto } = useMutation({
     mutationFn: () => uploadPhoto(prepareFormData()),
     onSuccess: (response) => {
@@ -110,7 +129,7 @@ export default function Profile() {
     },
   });
 
- 
+
   function prepareFormData() {
     if (!imageInput.current?.files?.[0]) {
       return;
@@ -169,10 +188,10 @@ export default function Profile() {
 
   const formattedBirthday = profileUser?.dateOfBirth
     ? new Date(profileUser.dateOfBirth).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
     : "Not available";
 
 
@@ -183,7 +202,7 @@ export default function Profile() {
 
           {/* Cover */}
           <div className="profile-cover ">
-            <img className="w-full h-full object-cover" src={profileUser?.cover || cover } alt="" />
+            <img className="w-full h-full object-cover" src={profileUser?.cover || cover} alt="" />
             {isMyProfile && <button className="cover-action">Add cover photo</button>}
           </div>
 
@@ -340,8 +359,13 @@ export default function Profile() {
                 <div>
                   <h1 className="profile-name capitalize">{profileUser?.name}</h1>
                   <div className="flex justify-center gap-3">
-                    <p className="profile-subtitle">{profileUser?.followersCount || 0} followers</p>
-                  <p className="profile-subtitle">{profileUser?.followingCount || 0} following</p>
+                    <Link
+                      to={`/profile/${profileUser?._id || targetUserId}/followers`}
+                      className="profile-subtitle hover:underline hover:text-indigo-600 dark:hover:text-indigo-400 transition cursor-pointer"
+                    >
+                      {profileUser?.followersCount ?? followersList.length} followers
+                    </Link>
+                    <p className="profile-subtitle">{profileUser?.followingCount ?? followingList.length} following</p>
                   </div>
                 </div>
 
@@ -349,7 +373,13 @@ export default function Profile() {
                   {!isMyProfile && (
                     <>
                       <button className="primary-btn">Message</button>
-                      <buttonv onClick={mutate} className="secondary-btn">{followingData?.data?.data?.following ? 'Unfollow' : 'Follow'}</buttonv>
+                      <button onClick={mutate} className="secondary-btn" disabled={isPending}>
+                        {isPending
+                          ? 'Updating...'
+                          : followingData?.data?.data?.following
+                          ? 'Unfollow'
+                          : `${userData?.followers?.some((follower) => (typeof follower === 'object' ? follower?._id : follower) === data?._id) ? 'Unfollow' : 'Follow'}`}
+                      </button>
                     </>
                   )}
 
@@ -368,8 +398,8 @@ export default function Profile() {
           <div className="profile-tabs">
             <button className="tab active">Posts</button>
             <button className="tab">About</button>
-            <button className="tab">Friends</button>
-            <button className="tab">Photos</button>
+            <Link to={`/profile/${profileUser?._id || targetUserId}/followers`} className="tab flex items-center justify-center">Followers</Link>
+            <Link to={`/profile/${profileUser?._id || targetUserId}/photos`} className="tab flex items-center justify-center">Photos</Link>
             <button className="tab">Videos</button>
             <button className="tab">More</button>
           </div>
@@ -386,51 +416,86 @@ export default function Profile() {
               <h3>Intro</h3>
               <ul>
                 <li>🎂 Birthday: <span>{formattedBirthday}</span></li>
-                <li>👥 Followers: <span>{profileUser?.followersCount || 0}</span></li>
-                <li>➕ Following: <span>{profileUser?.followingCount || 0}</span></li>
+                <li>👥 Followers: <span>{profileUser?.followersCount ?? followersList.length}</span></li>
+                <li>➕ Following: <span>{profileUser?.followingCount ?? followingList.length}</span></li>
                 <li>
                   ⚧ Gender: <span className="capitalize">{profileUser?.gender || "Not available"}</span>
                 </li>
               </ul>
             </div>
 
-            {/* Friends */}
+            {/* Followers */}
             <div className="info-card">
               <div className="card-header">
-                <h3>Friends</h3>
-                <span>See all friends</span>
+                <h3>Followers</h3>
+                <Link
+                  to={`/profile/${profileUser?._id || targetUserId}/followers`}
+                  className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300 transition"
+                >
+                  See all followers
+                </Link>
               </div>
 
-              {userData.followers.length >0 ? <div className="friends-grid">
+              {followersList.length > 0 ? (
+                <div className="friends-grid">
+                  {followersList.slice(0, 6).map((friend, idx) => {
+                    const isObj = typeof friend === 'object' && friend !== null;
+                    const friendId = isObj ? (friend._id || friend.id) : friend;
+                    const friendName = isObj ? (friend.name || 'User') : 'User';
+                    const friendPhoto = isObj && friend.photo ? friend.photo : defaultAvatar;
 
-                {userData.followers.slice(0,6).map((friend)=> <Link to={`/profile/${friend._id}`}><div>
-                  <img src={friend.photo} alt="friend" />
-                  <span>{friend.name}</span>
-                </div></Link>)}
-               
-              </div> : <div className="w-full text-center"><span>No friends yet...😒 </span></div>}
+                    return (
+                      <Link key={friendId || idx} to={friendId ? `/profile/${friendId}` : '#'}>
+                        <div>
+                          <img
+                            src={friendPhoto}
+                            alt={friendName}
+                            onError={(e) => {
+                              e.currentTarget.src = defaultAvatar;
+                            }}
+                          />
+                          <span className="truncate">{friendName}</span>
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="w-full text-center"><span>No followers yet...😒 </span></div>
+              )}
 
-              
             </div>
 
             {/* Photos */}
             <div className="info-card">
               <div className="card-header">
                 <h3>Photos</h3>
-                <span>See all photos</span>
+                <Link
+                  to={`/profile/${profileUser?._id || targetUserId}/photos`}
+                  className="text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-500 dark:hover:text-indigo-300 transition"
+                >
+                  See all photos
+                </Link>
               </div>
 
-              <div className="photo-grid">
-                <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=500&q=80" alt="photo" />
-                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=500&q=80" alt="photo" />
-                <img src="https://images.unsplash.com/photo-1521119989659-a83eee488004?auto=format&fit=crop&w=500&q=80" alt="photo" />
-                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80" alt="photo" />
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80" alt="photo" />
-                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&q=80" alt="photo" />
-              </div>
+              {profilePosts?.filter((post) => post.image).length > 0 ? (
+                <div className="photo-grid">
+                  {profilePosts
+                    .filter((post) => post.image)
+                    .slice(0, 6)
+                    .map((post) => (
+                      <img key={post._id} src={post.image} alt="photo" />
+                    ))}
+                </div>
+              ) : (
+                <div className="w-full text-center">
+                  <span>No photos yet...😒 </span>
+                </div>
+              )}
+
             </div>
 
-            
+
           </aside>
 
           {/* Posts */}

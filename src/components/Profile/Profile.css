@@ -296,15 +296,18 @@
   margin-bottom: 14px;
 }
 
-.card-header span {
+.card-header span,
+.card-header a {
   color: #8b5cf6;
   font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
   transition: color 0.2s;
+  text-decoration: none;
 }
 
-.card-header span:hover {
+.card-header span:hover,
+.card-header a:hover {
   color: #a855f7;
   text-decoration: underline;
 }

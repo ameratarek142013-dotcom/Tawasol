@@ -120,7 +120,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen mt-18 bg-slate-100 dark:bg-[#0B0E14] text-slate-900 dark:text-slate-100 flex font-sans antialiased selection:bg-purple-600 selection:text-white transition-colors duration-200">
+    <div className="min-h-screen mt-18 bg-slate-100 dark:bg-[#0B0E14] text-slate-900 dark:text-slate-100 flex antialiased selection:bg-purple-600 selection:text-white transition-colors duration-200">
       <LeftSidebar
         userData={userData}
         onOpenCreatePost={() => setIsCreatePostOpen(true)}

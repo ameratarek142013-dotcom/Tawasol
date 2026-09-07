@@ -60,7 +60,7 @@ export default function LeftSidebar({
       )}
 
       <aside
-        className={`w-64 shrink-0 flex flex-col justify-between lg:-mt-18 h-screen fixed lg:sticky top-0 z-40 lg:z-10 px-4 py-5 border-r border-slate-200 dark:border-[#1E2536] bg-white dark:bg-[#0B0E14] text-slate-900 dark:text-slate-100 select-none transition-transform duration-300 lg:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        className={`bg-white w-64 shrink-0 flex flex-col justify-between lg:-mt-18 h-screen fixed lg:sticky top-0 z-40 lg:z-10 px-4 py-5 border-r border-slate-200 dark:border-[#1E2536] dark:bg-[#151B27]  text-slate-900 dark:text-slate-100 select-none transition-transform duration-300 lg:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
           }`}
       >
         <div className="flex flex-col gap-5 overflow-y-auto pr-1">

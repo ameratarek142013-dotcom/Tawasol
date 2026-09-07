@@ -59,7 +59,7 @@ function App() {
 
 
       <ThemeContextProvider>
-        <div className='min-h-screen bg-slate-100 dark:bg-[#0B0E14] text-slate-900 dark:text-slate-100 transition-colors duration-200'>
+        <div className='min-h-screen bg-white dark:bg-[#151B27]  text-slate-900 dark:text-slate-100 transition-colors duration-200'>
           <QueryClientProvider client={query}>
             <UserContextProvider>
               <CounterContextProvider>

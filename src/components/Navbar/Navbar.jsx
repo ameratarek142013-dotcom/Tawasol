@@ -26,13 +26,13 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="navbar  dark:bg-[#0B0E14] bg-white border-b  dark:border-[#1E2536] border-slate-200  dark:text-slate-100 text-slate-900 shadow-sm px-6 md:px-12 fixed top-0 z-30 transition-colors duration-200">
+      <div className="navbar bg-white dark:bg-[#0B0E14]  border-b  dark:border-[#1E2536] border-slate-200  dark:text-slate-100 text-slate-900 shadow-sm px-6 md:px-12 fixed top-0 z-30 transition-colors duration-200">
         <div className="flex-1">
           <Link to="/home" className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-xl bg-linear-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center shadow-md shadow-purple-600/30">
               <span className="text-white font-extrabold text-base tracking-tighter">T</span>
             </div>
-            <span className="text-2xl font-bold tracking-tight  dark:text-white text-slate-900 ">Tawasol</span>
+            <span className="text-2xl font-bold tracking-tight text-slate-900  dark:text-white  ">Tawasol</span>
           </Link>
         </div>
         <div className="flex gap-4 items-center">

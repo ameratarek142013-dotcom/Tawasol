@@ -59,7 +59,6 @@ function App() {
 
 
       <ThemeContextProvider>
-        <div className='min-h-screen bg-white dark:bg-[#151B27]  text-slate-900 dark:text-slate-100 transition-colors duration-200'>
           <QueryClientProvider client={query}>
             <UserContextProvider>
               <CounterContextProvider>
@@ -78,7 +77,6 @@ function App() {
               </CounterContextProvider>
             </UserContextProvider>
           </QueryClientProvider>
-        </div>
       </ThemeContextProvider>
 
     </>

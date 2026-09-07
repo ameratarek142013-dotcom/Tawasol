@@ -119,38 +119,38 @@ export default function PostCreation({ isProfile, userData, isOpenProp, onOpenCh
 
                 {/* Bottom Row: Quick Action Media Buttons */}
                 <div className="flex items-center justify-between pt-1 border-t  dark:border-[#1C2436] border-slate-200 text-xs font-medium  dark:text-slate-300 text-slate-600">
-                    <button
+                    <div
                         onClick={handleModalOpen}
                         className="flex items-center gap-2 py-1.5 px-2.5 rounded-xl  dark:hover:bg-[#1E2638] hover:bg-slate-100 transition cursor-pointer  dark:text-slate-300 text-slate-700  dark:hover:text-white hover:text-slate-900"
                     >
                         <IoImageOutline className="text-lg text-emerald-400" />
                         <span>Photo/Video</span>
-                    </button>
+                    </div>
 
-                    <button
+                    <div
                         onClick={handleModalOpen}
                         className="flex items-center gap-2 py-1.5 px-2.5 rounded-xl  dark:hover:bg-[#1E2638] hover:bg-slate-100 transition cursor-pointer  dark:text-slate-300 text-slate-700  dark:hover:text-white hover:text-slate-900"
                     >
                         <IoHappyOutline className="text-lg text-amber-400" />
                         <span>Feeling</span>
-                    </button>
+                    </div>
 
-                    <button
+                    <div
                         onClick={handleModalOpen}
                         className="flex items-center gap-2 py-1.5 px-2.5 rounded-xl  dark:hover:bg-[#1E2638] hover:bg-slate-100 transition cursor-pointer  dark:text-slate-300 text-slate-700  dark:hover:text-white hover:text-slate-900"
                     >
                         <IoLocationOutline className="text-lg text-rose-400" />
                         <span>Check in</span>
-                    </button>
+                    </div>
 
                     
 
-                    <button
+                    <div
                         onClick={handleModalOpen}
                         className="p-1.5 rounded-lg  dark:hover:bg-[#1E2638] hover:bg-slate-100 text-slate-400  dark:hover:text-white hover:text-slate-900 transition cursor-pointer"
                     >
                         <IoEllipsisHorizontal className="text-base" />
-                    </button>
+                    </div>
                 </div>
             </div>
 

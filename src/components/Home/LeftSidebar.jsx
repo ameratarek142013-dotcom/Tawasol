@@ -100,10 +100,10 @@ export default function LeftSidebar({
                     }`}
                 >
                   <div className="flex items-center gap-3.5">
-                    <span className={activeItem === item.label ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-500 dark:text-slate-400'}>
+                    <span className={activeItem === item.label ? 'text-indigo-400' : 'text-slate-500'}>
                       {item.icon}
                     </span>
-                    <span className={activeItem === item.label ? 'text-indigo-900 dark:text-white font-semibold' : ''}>{item.label}</span>
+                    <span className={activeItem === item.label ? 'text-indigo-400 font-bold' : 'text-slate-400 dark:text-slate-200'}>{item.label}</span>
                   </div>
 
                   {item.badge && (

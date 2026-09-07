@@ -365,7 +365,12 @@ export default function Profile() {
                     >
                       {profileUser?.followersCount ?? followersList.length} followers
                     </Link>
-                    <p className="profile-subtitle">{profileUser?.followingCount ?? followingList.length} following</p>
+                    <Link
+                      to={`/profile/${profileUser?._id || targetUserId}/following`}
+                      className="profile-subtitle hover:underline hover:text-indigo-600 dark:hover:text-indigo-400 transition cursor-pointer"
+                    >
+                      {profileUser?.followingCount ?? followingList.length} following
+                    </Link>
                   </div>
                 </div>
 
@@ -416,8 +421,18 @@ export default function Profile() {
               <h3>Intro</h3>
               <ul>
                 <li>🎂 Birthday: <span>{formattedBirthday}</span></li>
-                <li>👥 Followers: <span>{profileUser?.followersCount ?? followersList.length}</span></li>
-                <li>➕ Following: <span>{profileUser?.followingCount ?? followingList.length}</span></li>
+                <li>
+                  👥 Followers:{" "}
+                  <Link to={`/profile/${profileUser?._id || targetUserId}/followers`} className="hover:underline text-indigo-600 dark:text-indigo-400">
+                    <span>{profileUser?.followersCount ?? followersList.length}</span>
+                  </Link>
+                </li>
+                <li>
+                  ➕ Following:{" "}
+                  <Link to={`/profile/${profileUser?._id || targetUserId}/following`} className="hover:underline text-indigo-600 dark:text-indigo-400">
+                    <span>{profileUser?.followingCount ?? followingList.length}</span>
+                  </Link>
+                </li>
                 <li>
                   ⚧ Gender: <span className="capitalize">{profileUser?.gender || "Not available"}</span>
                 </li>
@@ -465,6 +480,8 @@ export default function Profile() {
               )}
 
             </div>
+
+         
 
             {/* Photos */}
             <div className="info-card">

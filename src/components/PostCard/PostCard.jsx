@@ -448,7 +448,7 @@ export default function PostCard({ post, isDetails, comments, isProfile, userDat
                             {/* Share Action */}
                             <button
                                 onClick={() => setIsShareOpen(true)}
-                                className="flex items-center justify-center gap-2 py-2 rounded-xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-[#1C2333] transition cursor-pointer"
+                                className="flex items-center justify-center gap-2 py-2 rounded-xl text-gray-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-[#1C2333] transition cursor-pointer"
                             >
                                 <TbShare3 className="text-lg" />
                                 <span>Share</span>

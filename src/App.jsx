@@ -20,6 +20,7 @@ import Settings from './components/Settings/Settings'
 import FollowerSuggetions from './components/FollowerSuggetions/FollowerSuggetions'
 import ProfilePhotos from './components/ProfilePhotos/ProfilePhotos'
 import ProfileFollowers from './components/ProfileFollowers/ProfileFollowers'
+import ProfileFollowing from './components/ProfileFollowing/ProfileFollowing'
 
 
 const query = new QueryClient()
@@ -35,6 +36,8 @@ let router = createBrowserRouter([
       { path: "/profile/:id/photos", element: <ProtectedRoute><ProfilePhotos /></ProtectedRoute> },
       { path: "/profile/followers", element: <ProtectedRoute><ProfileFollowers /></ProtectedRoute> },
       { path: "/profile/:id/followers", element: <ProtectedRoute><ProfileFollowers /></ProtectedRoute> },
+      { path: "/profile/following", element: <ProtectedRoute><ProfileFollowing /></ProtectedRoute> },
+      { path: "/profile/:id/following", element: <ProtectedRoute><ProfileFollowing /></ProtectedRoute> },
       { path: "/settings", element: <ProtectedRoute><Settings/></ProtectedRoute> },
       { path: "/followsuggetions", element: <ProtectedRoute><FollowerSuggetions/></ProtectedRoute> },
       { path: "/postdetails/:id", element: <ProtectedRoute><PostDetails /></ProtectedRoute> },
